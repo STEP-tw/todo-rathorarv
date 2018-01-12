@@ -1,7 +1,6 @@
 let chai = require('chai');
 let assert = chai.assert;
 let request = require('./requestSimulator.js');
-process.env.COMMENT_STORE = "./testStore.json";
 let app = require('../app.js');
 let th = require('./testHelper.js');
 
@@ -28,5 +27,18 @@ describe('app', () => {
         done();
       });
     });
+  });
+  describe('GET /loginPage.html', () => {
+    it('serves the login page', done => {
+      request(app, {
+        method: 'GET',
+        url: '/loginPage.html'
+      }, res => {
+        th.status_is_ok(res);
+        th.body_contains(res, 'userName');
+        th.body_does_not_contain(res, 'login failed');
+        done();
+      })
+    })
   })
 });

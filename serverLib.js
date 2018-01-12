@@ -1,3 +1,5 @@
+let registeredUsers = [{userName:'arvinds',password:"arvind singh"}];
+
 const fs = require('fs');
 const timeStamp = ()=>{
   let t = new Date();
@@ -39,5 +41,5 @@ exports.logRequest = (req,res)=>{
   ''
   ].join('\n');
   fs.appendFile('request.log',text,()=>{})
-  console.log(`${req.method} ${req.url}`);
+  // console.log(`${req.method} ${req.url}`);
 }
