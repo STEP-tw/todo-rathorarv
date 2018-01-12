@@ -22,7 +22,7 @@ const getHeader = function (file) {
   return headers[fileType];
 };
 
-exports.serveFile = function (req, res) {
+const serveFile = function (req, res) {
   let filePath = `public${req.url}`;
   if (req.method == 'GET' && fs.existsSync(filePath)) {
     res.setHeader("content-type",getHeader(filePath));
@@ -31,7 +31,7 @@ exports.serveFile = function (req, res) {
   }
 }
 
-exports.logRequest = (req,res)=>{
+const logRequest = (req,res)=>{
   let text = ['----------------------------',
   `${timeStamp()}`,
   `${req.method} ${req.url}`,
@@ -43,7 +43,7 @@ exports.logRequest = (req,res)=>{
   fs.appendFile('request.log',text,()=>{})
   // console.log(`${req.method} ${req.url}`);
 }
-exports.loginHandler = (req,res)=>{
+const loginHandler = (req,res)=>{
   let user = registeredUsers.find(u=>u.userName==req.body.userName);
   if(!user) {
     res.setHeader('Set-Cookie',`logInFailed=true; Max-Age=5`);
@@ -56,13 +56,13 @@ exports.loginHandler = (req,res)=>{
   res.redirect('/home.html');
 }
 
-exports.logoutHandler = (req,res)=>{
+const logoutHandler = (req,res)=>{
   res.setHeader('set-cookie',[`sessionid=0; Expires=new Date(0);`,
   `logInFailed=false; Expires=new Date(0);`]);
   res.redirect('/loginPage.html');
 }
 
-exports.loadUser = (req,res)=>{
+const loadUser = (req,res)=>{
   let sessionid = req.cookies.sessionid;
   let user = registeredUsers.find(u=>u.sessionid==sessionid);
   if(sessionid && user){

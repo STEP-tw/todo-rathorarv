@@ -1,13 +1,8 @@
 const writeData = function(data){
-  let title = document.createElement('h3');
-  let description = document.createElement('p');
+  let title = document.createElement('a');
   title.innerText = data.title;
-  description.innerText = data.description;
-  let todo = document.createElement('div');
-  todo.className = todo;
-  todo.appendChild(title);
-  todo.appendChild(description);
-  return todo;
+  title.href = "/" + data.title;
+  return title;
 }
 
 const createTodo = function(){
@@ -18,6 +13,8 @@ const createTodo = function(){
     let todo = JSON.parse(returndata);
     let list = document.getElementById('allTodo');
     list.appendChild(writeData(todo));
+    let lineBreak = document.createElement('br');
+    list.appendChild(lineBreak);
   }
   let xhr = new XMLHttpRequest();
   xhr.addEventListener('load',callBack);
