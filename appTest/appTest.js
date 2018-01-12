@@ -41,4 +41,38 @@ describe('app', () => {
       })
     })
   })
+  describe('POST /login', () => {
+    it('redirects to home for valid user', done => {
+      request(app, {
+        method: 'POST',
+        url: '/login',
+        body: 'userName=arvinds'
+      }, res => {
+        th.should_be_redirected_to(res, '/home.html');
+        th.should_not_have_cookie(res, 'message');
+        done();
+      })
+    })
+    it('redirects to loginPage.html with message for invalid user', done => {
+      request(app, {
+        method: 'POST',
+        url: '/login',
+        body: 'username=badUser'
+      }, res => {
+        th.should_be_redirected_to(res, '/loginPage.html');
+        th.should_have_expiring_cookie(res, 'logInFailed', 'true');
+        done();
+      })
+    })
+    it('redirects to loginPage.html on logout', done => {
+      request(app, {
+        method: "GET",
+        url: '/logout'
+      }, res => {
+        th.should_be_redirected_to(res, '/loginPage.html');
+        th.should_not_have_cookie(res, 'sessionid');
+        done();
+      })
+    })
+  });
 });
