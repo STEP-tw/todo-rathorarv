@@ -13,5 +13,11 @@ app.post('/login',lib.loginHandler);
 
 app.get('/logout',lib.logoutHandler);
 
+app.post('/todoHandler',(req,res)=>{
+  let todo = req.body;
+  console.log(todo);
+  res.write(JSON.stringify(todo));
+  res.end();
+})
 
 module.exports = app;

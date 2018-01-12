@@ -1,0 +1,13 @@
+{
+  "name": "toDoApp",
+  "version": "0.0.1",
+  "main": "server.js",
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^3.4.2"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+}

@@ -3,3 +3,11 @@
   padding-left: 550px;
   color: orange;
 }
+.addTodo {
+  margin-left: 900px;
+  position: absolute;
+}
+
+.list {
+  position: absolute;
+}
