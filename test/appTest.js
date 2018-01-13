@@ -17,13 +17,14 @@ describe('app', () => {
     })
   })
   describe('GET /', () => {
-    it('redirects to loginPage.html', done => {
+    it('serves the loginPage.html', done => {
       request(app, {
         method: 'GET',
         url: '/'
       }, (res) => {
-        th.should_be_redirected_to(res, '/loginPage.html');
-        assert.equal(res.body, "");
+        th.status_is_ok(res);
+        th.body_contains(res, 'userName');
+        th.body_does_not_contain(res, 'login failed');
         done();
       });
     });

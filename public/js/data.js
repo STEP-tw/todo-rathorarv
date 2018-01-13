@@ -1,1 +1,17 @@
-var data = {"arvinds":{"titles":{"sadfghj":{"description":"rewtyu","todoItems":[]},"heklsd":{"description":"sadf","todoItems":[]}}}}
+var data = {
+  "arvinds": [
+    {
+      "title": "today",
+      "description": "aaj ka today",
+      "todoItems": [
+        "khana khana h",
+        "sona h"
+      ]
+    },
+    {
+      "title": "ramu",
+      "description": "shyamu",
+      "todoItems": []
+    }
+  ]
+}

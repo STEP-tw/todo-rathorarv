@@ -11,3 +11,8 @@
 .list {
   position: absolute;
 }
+
+#addItems {
+  position: absolute;
+  margin-left: 400px;
+}

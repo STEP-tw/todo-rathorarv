@@ -1,7 +1,8 @@
-class userTodo {
-  constructor(description) {
+class UserTodo {
+  constructor(title,description,todoItems=[]) {
+    this.title = title;
     this.description = description;
-    this.todoItems = [];
+    this.todoItems = todoItems;
   }
   getToDoItems(){
     return this.todoItems
@@ -18,5 +19,8 @@ class userTodo {
   deleteTodoItem(index){
     return this.todoItems.splice(index,1);
   }
+  addTodoItems(item){
+    this.todoItems.push(item);
+  }
 }
-module.exports = userTodo;
+module.exports = UserTodo;
