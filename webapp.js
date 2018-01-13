@@ -1,4 +1,4 @@
-const qs = require('qs');
+const qs = require('querystring');
 const toKeyValue = kv => {
   let parts = kv.split('=');
   return {
