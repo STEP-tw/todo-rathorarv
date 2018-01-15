@@ -56,7 +56,7 @@ const serveFile = function(req, res) {
 }
 
 const getItemsAsHtml = function(userData) {
-  let heading = fs.readFileSync('./public/templates/addTodoItems.html','utf8');
+  let heading = fs.readFileSync('./templates/addTodoItems.html','utf8');
   let items = userData.todoItems.map(function(item,index) {
     return `<p>${item}<button id=${index} onclick=deleteItem()>delete</button></p>`
   });

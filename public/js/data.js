@@ -5,8 +5,8 @@ var data = {
       "description": "this is my todo app",
       "todoItems": [
         "first write test which is diificult",
-        "use mvc ",
-        "place of folder is matter"
+        "place of folder is matter",
+        "do small things"
       ]
     }
   ]
