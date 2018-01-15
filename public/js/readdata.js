@@ -3,12 +3,15 @@ let allTitle = userTodo.map((ele)=>ele.title);
 let writeTitle = function(){
   let list = document.getElementById('allTodo');
   allTitle.forEach(function(ele){
-    let data = {title:ele}
-    let title = writeData(data);
-    list.appendChild(title);
-    let lineBreak = document.createElement('br');
-    list.appendChild(lineBreak);
+    let todoName = writeData(ele);
+    list.appendChild(todoName);
   })
 }
 
+// const getAllTitle = function(){
+//   let xhr = new XMLHttpRequest();
+//   xhr.addEventListener('load', callBack);
+//   xhr.open('POST', '/addItems', 'true');
+//   xhr.send(`item=${todoItem}&description=${description}`);
+// }
 window.onload = writeTitle;

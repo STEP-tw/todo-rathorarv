@@ -57,10 +57,10 @@ const serveFile = function(req, res) {
 
 const getItemsAsHtml = function(userData) {
   let heading = fs.readFileSync('./public/templates/addTodoItems.html','utf8');
-  let items = userData.todoItems.map(function(item) {
-    return `<h4 class="todo">${item}<h4>`
+  let items = userData.todoItems.map(function(item,index) {
+    return `<p>${item}<button id=${index} onclick=deleteItem()>delete</button></p>`
   });
-  return heading + items.join('') + '<br>' + fs.readFileSync('./public/addTodoItmes.html', 'utf8');
+  return heading + items.join('') + fs.readFileSync('./public/addTodoItmes.html', 'utf8');
 }
 
 const serveToDoItems = function(req, res) {
@@ -68,7 +68,9 @@ const serveToDoItems = function(req, res) {
   path = path.replace('/', '');
   if (allTitle.includes(path)) {
     res.setHeader('content-type', 'text/html');
-    let todo = userTodo.find(t => t.title == path);
+    users.addData();
+    let allTodo = users.allusers.arvinds;
+    let todo = allTodo.find(t => t.title == path);
     let content = getItemsAsHtml(todo);
     content = content.replace('details',todo.description);
     res.write(content);
@@ -86,7 +88,7 @@ const logRequest = (req, res) => {
     ''
   ].join('\n');
   fs.appendFile('request.log', text, () => {})
-  console.log(`${req.method} ${req.url}`);
+  // console.log(`${req.method} ${req.url}`);
 }
 const loginHandler = (req, res) => {
   let user = registeredUsers.find(u => u.userName == req.body.userName);
@@ -98,13 +100,12 @@ const loginHandler = (req, res) => {
   let sessionid = new Date().getTime();
   res.setHeader('Set-Cookie', `sessionid=${sessionid}`);
   user.sessionid = sessionid;
-  users.addUser('arvinds');
   res.redirect('/home.html');
 }
 
 const logoutHandler = (req, res) => {
-  res.setHeader('set-cookie', [`sessionid=0; Expires=new Date(0);`,
-    `logInFailed=false; Expires=new Date(0);`
+  res.setHeader('set-cookie', [`sessionid=0; Max-Age=-1;`,
+    `logInFailed=false; Max-Age=-1;`
   ]);
   res.redirect('/loginPage.html');
 }
@@ -117,6 +118,13 @@ const loadUser = (req, res) => {
   }
 };
 
+const haslogin = function(req,res) {
+  refreshTitle(userTodo);
+  let path = req.url.replace('/','');
+  if(allurl.includes(path)&& !req.user)
+  res.redirect('loginPage.html');
+}
+
 const redirectLoggedOutUserToLogin = (req, res) => {
   if (req.urlIsOneOf(['/home.html', '/logout']) && !req.user) res.redirect('/loginPage.html');
 }
@@ -126,38 +134,50 @@ const redirectLoggedInUserToHome = (req, res) => {
 }
 
 const handleTodo = function(req, res) {
+  users.writeInPublicFile();
   let todoDetails = req.body;
   let todo = new Title(todoDetails.title, todoDetails.description);
   users.addTitle('arvinds', todo);
-  users.writeInFile();
+  users.writeInConfiFile();
   refreshTitle(users);
   res.write(JSON.stringify(req.body));
   res.end();
 }
-// =============================================
 
+const itemhandler = (req, res) => {
+  let item = req.body.item;
+  let description = req.body.description;
+  let userAllTodo = users.addTodoItem(req.user.userName,description,item);
+  users.writeInConfiFile();
+  users.writeInPublicFile();
+  res.write(item);
+  res.end();
+}
+
+const deleteTitle = function(req,res){
+  users.deleteTitle(req.user.userName,req.body.title);
+  users.writeInConfiFile();
+  users.writeInPublicFile();
+  res.end();
+}
+const deleteItem = function(req,res){
+  users.deleteItem(req.user.userName,req.body.title,req.body.index);
+  users.writeInConfiFile();
+  users.writeInPublicFile();
+  res.end();
+}
+// =============================================
 app.use(logRequest);
-app.use(serveToDoItems);
 app.use(loadUser);
+app.use(serveToDoItems);
+app.use(haslogin);
 app.use(redirectLoggedInUserToHome);
 app.use(redirectLoggedOutUserToLogin);
 app.postprocess(serveFile);
-  // app.get('/', (req, res) => {
-  //   res.redirect('/loginPage.html');
-  // })
-
 app.post('/login', loginHandler);
-
+app.post('/deleteTitle',deleteTitle);
+app.post('/deleteItem',deleteItem);
 app.get('/logout', logoutHandler);
-
 app.post('/todoHandler', handleTodo);
-
-app.post('/addItems', (req, res) => {
-  let item = req.body.item;
-  let description = req.body.description;
-  let userAllTodo = users.addTodoItem('arvinds',description,item);
-  res.write(item);
-  res.end();
-});
-
+app.post('/addItems', itemhandler);
 module.exports = app;

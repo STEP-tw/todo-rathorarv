@@ -5,13 +5,19 @@ class UserTodo {
     this.todoItems = todoItems;
   }
   getToDoItems(){
-    return this.todoItems
+    return this.todoItems;
+  }
+  getTitle(){
+    return this.title;
   }
   getDescription(){
-    return this.description
+    return this.description;
+  }
+  changeTitle(title){
+    this.title = title;
   }
   changeDescription (description){
-    this.description = description
+    this.description = description;
   }
   getToDoItemsByIndex (index){
     return this.todoItems[index];

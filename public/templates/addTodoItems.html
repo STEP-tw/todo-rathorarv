@@ -1,3 +1,16 @@
 <a href="/logout">logout</a>
 <a href="/home.html">home</a>
+<script type="text/javascript">
+const deleteItem = function(){
+  let index = event.target.id;
+  let title = location.pathname.replace('/','');
+  let xhr = new XMLHttpRequest();
+  xhr.addEventListener('load',()=>{
+    location.reload();
+  });
+  xhr.open('POST','/deleteItem','true');
+  xhr.send(`title=${title}&index=${index}`);
+}
+
+</script>
 <h2 id="desc">description:details<h2><br>

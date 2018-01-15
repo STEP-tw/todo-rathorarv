@@ -1,22 +1,13 @@
 var data = {
   "arvinds": [
     {
-      "title": "today",
-      "description": "aaj ka today",
+      "title": "todoApp",
+      "description": "this is my todo app",
       "todoItems": [
-        "khana khana h",
-        "sona h"
+        "first write test which is diificult",
+        "use mvc ",
+        "place of folder is matter"
       ]
-    },
-    {
-      "title": "ramu",
-      "description": "shyamu",
-      "todoItems": []
-    },
-    {
-      "title": "hello",
-      "description": "jai ho",
-      "todoItems": []
     }
   ]
 }
