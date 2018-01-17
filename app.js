@@ -11,6 +11,8 @@ app.post('/login',lib.loginHandler);
 app.get('/logout',lib.logoutHandle);
 app.post('/addTodo',lib.addTodoHandler);
 app.post('/getAllTitle',lib.getAllTitle);
+app.post('/deleteTodo',lib.deleteTodoHandler);
+app.post('/getTodoItems',lib.todoItemsHandler);
 app.postProcess(serveFile);
-
+app.postProcess(lib.serveTodo);
 module.exports = app;
