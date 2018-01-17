@@ -36,6 +36,7 @@ const callProcess = (process,req,res)=>{
 
 let invoke = function (req, res) {
   let handler = this._handlers[req.method][req.url];
+  // console.log(handler);
   if (!handler) {
     callProcess(this._postprocess,req,res);
     if (!res.finished) {
@@ -67,7 +68,7 @@ const post = function (url, handler) {
 const use = function (handler) {
   this._preprocess.push(handler);
 };
-const postprocess = function(handler){
+const postProcess = function(handler){
   this._postprocess.push(handler);
 }
 let urlIsOneOf = function (urls) {
@@ -97,7 +98,7 @@ let create = () => {
   rh.get = get;
   rh.post = post;
   rh.use = use;
-  rh.postprocess = postprocess;
+  rh.postProcess = postProcess;
   return rh;
 }
 exports.create = create;

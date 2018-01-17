@@ -1,7 +1,5 @@
-const fs = require('fs');
 const assert = require('chai').assert;
-
-let Todo = require('../dataStructure.js');
+let Todo = require('../lib/todo.js');
 
 describe('Todo', () => {
   describe('#getToDoItems', () => {
@@ -16,6 +14,21 @@ describe('Todo', () => {
       let todo = new Todo('home','home stuff');
       let expected = todo.getDescription();
       assert.equal(expected,'home stuff');
+    });
+  });
+  describe('#getTitle', () => {
+    it('should give title', () => {
+      let todo = new Todo('home','home stuff');
+      let expected = todo.getTitle();
+      assert.equal(expected,'home');
+    });
+  });
+  describe('#setTitle', () => {
+    it('should set title', () => {
+      let todo = new Todo('home','home stuff');
+      todo.setTitle('anotherhome');
+      let expected = todo.getTitle();
+      assert.equal(expected,'anotherhome');
     });
   });
   describe('#change description', () => {

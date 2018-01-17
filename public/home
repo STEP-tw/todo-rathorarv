@@ -1,14 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script type="text/javascript" src="/js/createTodo.js">
-    </script>
-    <script type="text/javascript" src="/js/data.js">
-
-    </script>
-    <script type="text/javascript" src="/js/readdata.js">
-
-    </script>
+    <script src="/js/createTodo.js"></script>
     <link rel="stylesheet" href="/css/todo.css">
     <meta charset="utf-8">
     <title>home</title>
@@ -23,7 +16,7 @@
     </div>
     <div id="form" class="addTodo">
       <h3>add new todo</h3>
-      title:<input type="text" name="title" id="title">
+      title:<textarea name="title" id="title"></textarea>
       <br>
       <br>
       description: <textarea name="description" rows="6" cols="40" id="description"></textarea>

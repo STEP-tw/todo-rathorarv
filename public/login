@@ -15,8 +15,8 @@
       </h1>
       welcome
   <form action="login" method="post">
-    userName:<input name="userName" type="text">
-    password:<input name="password" type="password">
+    userName:<input name="userName" type="text" required>
+    password:<input name="password" type="password" required>
     <input type="submit">
   </form>
 </body>

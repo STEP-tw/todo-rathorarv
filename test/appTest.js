@@ -17,7 +17,7 @@ describe('app', () => {
     })
   })
   describe('GET /', () => {
-    it('serves the loginPage.html', done => {
+    it('serves the login page', done => {
       request(app, {
         method: 'GET',
         url: '/'
@@ -29,11 +29,11 @@ describe('app', () => {
       });
     });
   });
-  describe('GET /loginPage.html', () => {
+  describe('GET /login', () => {
     it('serves the login page', done => {
       request(app, {
         method: 'GET',
-        url: '/loginPage.html'
+        url: '/login'
       }, res => {
         th.status_is_ok(res);
         th.body_contains(res, 'userName');
@@ -49,20 +49,19 @@ describe('app', () => {
         url: '/login',
         body: 'userName=arvinds'
       }, res => {
-        th.should_be_redirected_to(res, '/home.html');
+        th.should_be_redirected_to(res, 'home');
         th.should_not_have_cookie(res, 'message');
         done();
       })
     })
-    it('redirects to loginPage.html with message for invalid user', done => {
+    it('redirects to loginPage.html with message for invalid user', () => {
       request(app, {
         method: 'POST',
         url: '/login',
         body: 'username=badUser'
       }, res => {
-        th.should_be_redirected_to(res, '/loginPage.html');
+        th.should_be_redirected_to(res, '/login');
         th.should_have_expiring_cookie(res, 'logInFailed', 'true');
-        done();
       })
     })
     it('redirects to loginPage.html on logout', done => {
@@ -70,7 +69,7 @@ describe('app', () => {
         method: "GET",
         url: '/logout'
       }, res => {
-        th.should_be_redirected_to(res, '/loginPage.html');
+        th.should_be_redirected_to(res, '/login');
         th.should_not_have_cookie(res, 'sessionid');
         done();
       })
