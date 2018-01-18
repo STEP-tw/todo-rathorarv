@@ -7,16 +7,16 @@
     <title>home</title>
   </head>
   <body>
-    <a href="/logout">logout</a>
+    <a href="/logout" style="font-size:20px">Logout</a>
     <h1 class="login">Home</h1>
     <div class="list">
-      <h2>Your Todo's</h2>
+      <h2>YOUR TODO'S</h2>
       <div id="allTodo">
       </div>
     </div>
     <div id="form" class="addTodo">
-      <h3>add new todo</h3>
-      title:<textarea name="title" id="title"></textarea>
+      <h2>ADD NEW TODO</h2>
+      title:<input name="title" id="title"></input>
       <br>
       <br>
       description: <textarea name="description" rows="6" cols="40" id="description"></textarea>

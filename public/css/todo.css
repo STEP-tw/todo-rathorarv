@@ -1,5 +1,5 @@
 .login {
-  padding-top: 1px;
+  /* padding-top: 1px; */
   padding-left: 550px;
   color: orange;
 }
@@ -10,6 +10,10 @@
 
 .list {
   position: absolute;
+}
+
+.link {
+  font-size: 20px;
 }
 
 #addItems {
